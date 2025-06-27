@@ -6,7 +6,7 @@ class LinearRegression():
         self.W = None
 
     @staticmethod
-    def validate(A: ArrayLike, name: str):
+    def _validate(A: ArrayLike, name: str):
         try:
             A = np.asarray(A, dtype=float) # convert to numpy array
         except(ValueError, TypeError): # catch unexpected data types or ragged arrays
@@ -27,11 +27,24 @@ class LinearRegression():
             raise ValueError(f'{name} cannot be empty, got {A!r}.')
         
         return A
+    
+    def _print_W(self):
+        # ANSI color codes
+        GREEN = '\033[1;32m'
+        WHITE = '\033[1m'
+        RESET = '\033[0m'
+    
+        bias = self.W[0, 0]
+        coefficients = self.W[1:, 0]
+        
+        print(f'{GREEN}Linear Regression Successfully Fitted{RESET}\n')
+        print(f'{WHITE}Bias:{RESET} {bias}')
+        print(f'{WHITE}Coefficients:{RESET} {coefficients}')
 
     def fit(self, X: ArrayLike, Y: ArrayLike):
         try:
             # input validation and reshaping
-            X, Y = self.validate(X, 'X'), self.validate(Y, 'Y')
+            X, Y = self._validate(X, 'X'), self._validate(Y, 'Y')
             assert X.shape[0] == Y.shape[0], 'X and Y must have the same length.'
 
             # prepend 1 to each vector in X so the bias term is learned as part of the weight vector
@@ -39,8 +52,6 @@ class LinearRegression():
             X_aug = np.hstack((ones, X))
 
             self.W = np.linalg.solve(X_aug.T @ X_aug, X_aug.T @ Y) # compute weight vector 
+            self._print_W()
         except Exception as e:
             raise RuntimeError(f'Failed to fit: {e}') from None
-
-
-        # todo: add colorful terminal logging to show model is trained
