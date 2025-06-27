@@ -55,3 +55,16 @@ class LinearRegression():
             self._print_W()
         except Exception as e:
             raise RuntimeError(f'Failed to fit: {e}') from None
+        
+    def predict(self, X: ArrayLike):
+        try:
+            # input validation and reshaping
+            X = self._validate(X, 'X')
+
+            # prepend 1 to each vector in X so that the bias term in W stays unchanged
+            ones = np.ones((X.shape[0], 1))
+            X_aug = np.hstack((ones, X))
+
+            return X_aug @ self.W # output prediction
+        except Exception as e:
+            raise RuntimeError(f'Failed to predict: {e}') from None
