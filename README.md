@@ -24,7 +24,7 @@ $$
 
 where $n$ is the number data points, $y$ is the $y$ value of the data point (what we may call the "true" value later on), and $m, b$ are the slope and intercept terms in the classic definition of a line ($y = mx + b$) respectively. 
 
-*Note: The added factor of $\frac{1}{2n}$ is there simply to make differentiation down the line neater. Though it may change what the actual calculated loss is at a given point, it does* not *change where minimum of the function lays, which is what we are interested in.*
+*Note: The added factor of* $\frac{1}{2n}$ *is there simply to make differentiation down the line neater. Though it may change what the actual calculated loss is at a given point, it does* not *change where minimum of the function lays, which is what we are interested in.*
 
 Semantically, this function asks, "how well does my line $mx + b$ model the data?" Of course, a lower value means that line models the data better. Hence, for the best model, we must minimize the value of $L(m, b)$.
 
