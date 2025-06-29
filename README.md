@@ -19,6 +19,6 @@ There are several loss functions one may choose to optimize when fitting their m
 Since we are only concerned with the univariate case at the moment, we can define our loss function like this:
 
 $$ 
-\large L(m, b) = \frac{1}{2n} \sum_{i=1}^{n} (y - (mx_i + b))^2 
+\huge L(m, b) = \frac{1}{2n} \sum_{i=1}^{n} (y - (mx_i + b))^2
 $$
 
