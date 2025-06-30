@@ -12,17 +12,17 @@ The idea of linear regression dates back to more than 2 centuries ago. A corners
 
 #### Loss Function
 
-There are several loss functions one may choose to optimize when fitting their model. Here we choose the **mean squared error.** To breifly explain this loss function, suppose we have some 2-dimensional data i.e. a set of $(x, y)$ coordinates, and any line through that data. For each data point, this function will take the difference between the point's $y$ value and the value of the line at the point's $x$ value. Squaring this difference gives us the *squared error* for that point. The mean of all the squared errors is the calculated loss. 
+There are several loss functions one may choose to optimize when fitting their model. Here we choose **mean squared error.** To breifly explain this loss function, suppose we have some 2-dimensional data i.e. a set of $(x, y)$ coordinates, and any line through that data. For each data point, this function will take the difference between the point's $y$ value and the value of the line at the point's $x$ value. Squaring this difference gives us the *squared error* for that point. The mean of all the squared errors is the calculated loss. 
 
 #### Minimizing Loss
 
-Since we are only concerned with the univariate case at the moment, we can define our loss function like this:
+In the univariate case, we can define our loss function like this:
 
 $$ 
 \huge L(m, b) = \frac{1}{2n} \sum_{i=1}^{n} (y_i - (mx_i + b))^2
 $$
 
-where $n$ is the number data points, $y_i$ is the $y$ value of the $i$ th data point, and $m, b$ are the slope and intercept terms in the classic definition of a line ($y = mx + b$) respectively. 
+where $n$ is the number data points, $y_i$ is the $y$ value of the $i$ th data point (the "true" value), and $m, b$ are the slope and intercept terms in the classic definition of a line ($y = mx + b$) respectively. 
 
 *Note: The added factor of* $\frac{1}{2}$ *is there simply to make differentiation down the line neater. Though it may change what the actual calculated loss is at a given point, it does* not *change where minimum of the function lays, which is what we are interested in.*
 
@@ -91,7 +91,7 @@ $$
 
 where $\bar{x} = \frac{1}{n} \sum_{i} x_i$ and $\bar{y} = \frac{1}{n} \sum_{i} y_i$ are the means of all ${x_i}$ and ${y_i}$ respectively.
 
-We now have the values for $m$ and $b$ that minimize our loss function and can now use our new model for any univarite sample $x$, like this: $\hat{y} = mx + b$.
+We now have the values for $m$ and $b$ that minimize our loss function and can now use them on a new univarite sample $x$, like this: $\hat{y} = mx + b$.
 
 ### Multivariate Case
 
@@ -105,7 +105,7 @@ $$
 \huge L(\vec{w}) = \frac{1}{2n} \sum_{i=1}^{n} (y_i - \tilde{x_i}^T\vec{w})^2
 $$
 
-where $\vec{w}$ is a $(d+1 \times 1)$ column vector holding the bias term and the learned weights for each of the $d$ features, and $\tilde{x_i}$ is an augmented sample. In order to explain where this augmentation comes from, let's consider what one predicted value would look like if we had already fitted our model.
+where $\vec{w}$ is a $(d+1 \times 1)$ column vector holding a bias term and the learned weights for each of the $d$ features, and $\tilde{x_i}$ is an augmented sample from the data. In order to explain where this augmentation comes from, let's consider what one predicted value would look like if we had already fitted our model.
 
 $$
 \huge \hat{y} = w_0 + w_1x_1 + w_2x_2 + ...+w_dx_d
@@ -137,7 +137,13 @@ $$
 \end{aligned}
 $$
 
-Now we can find the gradient of our loss function. 
+To clarify, 
+
+$$
+\vec{y} = \begin{bmatrix} y_1 \\\ y_2 \\\ \vdots \\\ y_n \end{bmatrix}
+$$ 
+
+is the collection of all true $y_i$ values. Now we can find the gradient of our loss function. 
 
 $$
 \begin{aligned}
