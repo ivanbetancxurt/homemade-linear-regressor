@@ -70,7 +70,14 @@ $$
 \end{aligned}
 $$
 
-We can use matrices to solve the system. Let $A = \begin{bmatrix} \sum x_i^2 & \sum x_i \\ \sum x_i & n \end{bmatrix}, \vec{c} = \begin{pmatrix} \sum x_iy_i \\ \sum y_i \end{pmatrix}$. We assume $A$ is invertible. Observe that
+We can use matrices to solve the system. Let
+
+$$
+\large A = \begin{bmatrix} \sum x_i^2 & \sum x_i \\ \sum x_i & n \end{bmatrix}, \\
+\vec{c} = \begin{bmatrix} \sum x_iy_i \\ \sum y_i \end{bmatrix}.
+$$
+
+We assume $A$ is invertible. Observe that
 
 $$
 \begin{aligned}
