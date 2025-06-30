@@ -89,7 +89,7 @@ $$
 \end{aligned}
 $$
 
-where $\bar{x} = \frac{1}{n} \sum_{i} x_i$ and $\bar{y} = \frac{1}{n} \sum_{i} y_i$ are the means of all ${x_i}$ and ${y_i}$ respectively.
+where $\bar{x} = \frac{1}{n} \sum x_i$ and $\bar{y} = \frac{1}{n} \sum y_i$ are the means of all ${x_i}$ and ${y_i}$ respectively.
 
 We now have the values for $m$ and $b$ that minimize our loss function and can now use them on a new univarite sample $x$, like this: $\hat{y} = mx + b$.
 
