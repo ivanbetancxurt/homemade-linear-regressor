@@ -122,17 +122,42 @@ $$
 With this convention, we can represent all of our predicted values with an elegant expression:
 
 $$
-\huge \hat{Y} = \tilde{X} \vec{w}
+\huge \hat{Y} = \tilde{X} \vec{w} \tag{1}
 $$
 
-Now that we justified the augmentaion, we can show how to find $\vec{w}$. As I mentioned, the idea is the same; We must find where $\nabla L(\vec{w}) = \vec{0}$. It will make the calculations nicer to express $L(\vec{w})$ differently. Note that 
+Now that we justified the augmentaion, we can show how to actually find $\vec{w}$. As I mentioned, the idea is the same; We must find where $\nabla L(\vec{w}) = \vec{0}$. It will make the calculations nicer to express $L(\vec{w})$ differently. Note that 
 
 $$
 \begin{aligned}
 \huge L(\vec{w}) &\huge= \frac{1}{2n} \sum_{i=1}^{n} (y_i - \tilde{x_i}^T\vec{w})^2 \\
 &\huge = \frac{1}{2n} \lVert\vec{y} - \tilde{X}\vec{w}\rVert_2^2 \\
-&\huge = \frac{1}{2n} (\vec{y} - \tilde{X}\vec{w})^T(\vec{y} - \tilde{X}\vec{w}).
+&\huge = \frac{1}{2n} (\vec{y} - \tilde{X}\vec{w})^T(\vec{y} - \tilde{X}\vec{w}) \\
+&\huge = \frac{1}{2n} (\vec{y}^T \vec{y} - \vec{y}^T \tilde{X}\vec{w} - (\tilde{X}\vec{w})^T \vec{y} + \vec{w}^T\tilde{X}^T\tilde{X}\vec{w}) \\
+&\huge = \frac{1}{2n} (\vec{y}^T \vec{y} - 2\vec{w}^T\tilde{X}^T\vec{y} + \vec{w}^T\tilde{X}^T\tilde{X}\vec{w}).
 \end{aligned}
 $$
 
-Let $\vec{r}$ = $\vec{y} - \tilde{X}\vec{w}$. 
+Now we can find the gradient of our loss function. 
+
+$$
+\begin{aligned}
+\huge \nabla L(\vec{w}) &\huge= \nabla_{\vec{w}} (\frac{1}{2n} (\vec{y}^T \vec{y} - 2\vec{w}^T\tilde{X}^T\vec{y} + \vec{w}^T\tilde{X}^T\tilde{X}\vec{w})) \\
+&\huge = \frac{1}{2n} (\nabla_{\vec{w}} (\vec{y}^T \vec{y}) - 2\nabla_{\vec{w}} (\vec{w}^T\tilde{X}^T\vec{y}) + \nabla_{\vec{w}} (\vec{w}^T\tilde{X}^T\tilde{X}\vec{w})) \\
+&\huge = \frac{1}{2n} (-2\tilde{X}^T\vec{y} + 2\tilde{X}^T\tilde{X}\vec{w}) \\
+&\huge = \frac{1}{n} (\tilde{X}^T\tilde{X}\vec{w} - \tilde{X}^T\vec{y}).
+\end{aligned}
+$$
+
+Like the univariate case, all we have left to do now is solve for when $\nabla L(\vec{w}) = \vec{0}$. We assume $(\tilde{X}^T\tilde{X})$ is invertible. Observe that 
+
+$$
+\begin{aligned}
+&\huge \nabla L(\vec{w}) = \vec{0} \\
+\huge \Rightarrow &\huge \frac{1}{n} (\tilde{X}^T\tilde{X}\vec{w} - \tilde{X}^T\vec{y}) = \vec{0} \\
+\huge \Rightarrow &\huge \tilde{X}^T\tilde{X}\vec{w} - \tilde{X}^T\vec{y} = \vec{0} \\
+\huge \Rightarrow &\huge \tilde{X}^T\tilde{X}\vec{w} = \tilde{X}^T\vec{y} \\
+\huge \Rightarrow &\huge \vec{w} = (\tilde{X}^T\tilde{X})^{-1} \tilde{X}^T\vec{y}. \\
+\end{aligned}
+$$
+
+We can now use our learned $\vec{w}$ to predict on new data as seen in equation (1).
