@@ -12,7 +12,7 @@ The idea of linear regression dates back to more than 2 centuries ago. A corners
 
 #### Loss Function
 
-There are several loss functions one may choose to optimize when fitting their model. Here we choose the **sum of the squared residuals.** To breifly explain this loss function, suppose we have some 2-dimensional data i.e. a set of $(x, y)$ coordinates, and any line through that data. For each data point, this function will take the difference between the point's $y$ value and the value of the line at the point's $x$ value. Squaring this difference gives us the *squared residual* for that point. The sum of all the squared residuals is the calculated loss. 
+There are several loss functions one may choose to optimize when fitting their model. Here we choose the **mean squared error.** To breifly explain this loss function, suppose we have some 2-dimensional data i.e. a set of $(x, y)$ coordinates, and any line through that data. For each data point, this function will take the difference between the point's $y$ value and the value of the line at the point's $x$ value. Squaring this difference gives us the *squared error* for that point. The mean of all the squared errors is the calculated loss. 
 
 #### Minimizing Loss
 
@@ -24,7 +24,7 @@ $$
 
 where $n$ is the number data points, $y_i$ is the $y$ value of the $i$ th data point, and $m, b$ are the slope and intercept terms in the classic definition of a line ($y = mx + b$) respectively. 
 
-*Note: The added factor of* $\frac{1}{2n}$ *is there simply to make differentiation down the line neater. Though it may change what the actual calculated loss is at a given point, it does* not *change where minimum of the function lays, which is what we are interested in.*
+*Note: The added factor of* $\frac{1}{2}$ *is there simply to make differentiation down the line neater. Though it may change what the actual calculated loss is at a given point, it does* not *change where minimum of the function lays, which is what we are interested in.*
 
 Semantically, this function asks, "how well does my line $mx_i + b$ model the data?" Of course, a lower value means that line models the data better. Hence, for the best model, we must minimize the value of $L(m, b)$.
 
