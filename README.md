@@ -4,7 +4,7 @@ This project marks the beginning of a journey towards a goal I have set for myse
 
 ## Motivation
 
-The idea of linear regression dates back to more than 2 centuries ago. A cornerstone of statistics, this model elegant, fast, and easily interpretable, making it a great first choice for exploratory data analysis.
+The idea of linear regression dates back to more than 2 centuries ago. A cornerstone of statistics, this model is elegant, fast, and easily interpretable, making it a great first choice for exploratory data analysis.
 
 ## Mathematical Foundations
 
@@ -19,23 +19,67 @@ There are several loss functions one may choose to optimize when fitting their m
 Since we are only concerned with the univariate case at the moment, we can define our loss function like this:
 
 $$ 
-\huge L(m, b) = \frac{1}{2n} \sum_{i=1}^{n} (y - (mx_i + b))^2
+\huge L(m, b) = \frac{1}{2n} \sum_{i=1}^{n} (y_i - (mx_i + b))^2
 $$
 
-where $n$ is the number data points, $y$ is the $y$ value of the data point (what we may call the "true" value later on), and $m, b$ are the slope and intercept terms in the classic definition of a line ($y = mx + b$) respectively. 
+where $n$ is the number data points, $y_i$ is the $y$ value of the $i$ th data point (what we may call the "true" value later on), and $m, b$ are the slope and intercept terms in the classic definition of a line ($y = mx + b$) respectively. 
 
 *Note: The added factor of* $\frac{1}{2n}$ *is there simply to make differentiation down the line neater. Though it may change what the actual calculated loss is at a given point, it does* not *change where minimum of the function lays, which is what we are interested in.*
 
 Semantically, this function asks, "how well does my line $mx + b$ model the data?" Of course, a lower value means that line models the data better. Hence, for the best model, we must minimize the value of $L(m, b)$.
 
-We can do so by solving for where $\nabla L(m, b) = (0, 0)$. This will require us to first find $\frac{\partial L}{\partial m}$ and $\frac{\partial L}{\partial b}$. We start with $\frac{\partial L}{\partial m}$.
+We can do so by solving for where $\nabla L(m, b) = (0, 0)$. This requires us to first find $\frac{\partial L}{\partial m}$ and $\frac{\partial L}{\partial b}$.
 
 $$
 \begin{aligned}
-\huge \frac{\partial L}{\partial m} &\huge= \huge \frac{\partial}{\partial m} (\frac{1}{2n} \sum_{i=1}^{n} (y - (mx_i + b))^2) \\
-&\huge = \frac{1}{2n} \sum_{i=1}^{n} \frac{\partial}{\partial m} (y - (mx_i + b))^2 \\
-&\huge = \frac{1}{2n} \sum_{i=1}^{n} 2(y - (mx_i + b))(-x_i) \\
-&\huge = -\frac{1}{2n} \sum_{i=1}^{n} x_i(y - (mx_i + b))
+\huge \frac{\partial L}{\partial m} &\huge= \frac{\partial}{\partial m} (\frac{1}{2n} \sum_{i=1}^{n} (y_i - (mx_i + b))^2) \\
+&\huge = \frac{1}{2n} \sum_{i=1}^{n} \frac{\partial}{\partial m} (y_i - (mx_i + b))^2 \\
+&\huge = \frac{1}{2n} \sum_{i=1}^{n} 2(y_i - (mx_i + b))(-x_i) \\
+&\huge = -\frac{1}{n} \sum_{i=1}^{n} x_i(y_i - (mx_i + b)).
 \end{aligned}
 $$
 
+$$
+\begin{aligned}
+\huge \frac{\partial L}{\partial b} &\huge= \frac{\partial}{\partial b} (\frac{1}{2n} \sum_{i=1}^{n} (y_i - (mx_i + b))^2) \\
+&\huge = \frac{1}{2n} \sum_{i=1}^{n} \frac{\partial}{\partial b} (y_i - (mx_i + b))^2 \\
+&\huge = \frac{1}{2n} \sum_{i=1}^{n} 2(y_i - (mx_i + b))(-1) \\
+&\huge = -\frac{1}{n} \sum_{i=1}^{n} y_i - mx_i - b.
+\end{aligned}
+$$
+
+All that's left to do is set these derivative function equal to 0 and solve the system of equations. Then we will have found the values for $m$ and $b$ that satisfy $\nabla L(m, b) = (0, 0)$. Note that
+
+$$
+\begin{aligned}
+&\huge \frac{\partial L}{\partial m} = 0 \\
+\huge \Rightarrow &\huge -\frac{1}{n} \sum_{i=1}^{n} x_i(y_i - (mx_i + b)) = 0 \\
+\huge \Rightarrow &\huge \sum_{i=1}^{n} x_iy_i - mx_i^2 - bx_i = 0 \\
+\huge \Rightarrow &\huge \sum_{i=1}^{n} mx_i^2 + \sum_{i=1}^{n} bx_i = \sum_{i=1}^{n} x_iy_i \\
+\end{aligned}
+$$
+
+and similarly,
+
+$$
+\begin{aligned}
+&\huge \frac{\partial L}{\partial b} = 0 \\
+\huge \Rightarrow &\huge -\frac{1}{n} \sum_{i=1}^{n} y_i - mx_i - b = 0 \\
+\huge \Rightarrow &\huge \sum_{i=1}^{n} y_i - mx_i - b = 0 \\
+\huge \Rightarrow &\huge (\sum_{i=1}^{n} mx_i) + nb = \sum_{i=1}^{n} y_i. \\
+\end{aligned}
+$$
+
+We can use matrices to solve the system. Let $A = \begin{pmatrix} \sum x_i^2 & \sum x_i \\ \sum x_i & n \end{pmatrix}, c = \begin{pmatrix} \sum x_iy_i \\ \sum y_i \end{pmatrix}$. We assume $A$ is invertible. Observe that
+
+$$
+\begin{aligned}
+&\huge A \begin{pmatrix} m \\ b \end{pmatrix} = c \\
+\huge \Rightarrow &\huge A^{-1} (A \begin{pmatrix} m \\ b \end{pmatrix}) = A^{-1} c \\
+\huge \Rightarrow &\huge \begin{pmatrix} m \\ b \end{pmatrix} = A^{-1} c \\
+\huge \Rightarrow &\huge \begin{pmatrix} m \\ b \end{pmatrix} = \frac{1}{n \sum x_i^2 - (\sum x_i)^2} \begin{pmatrix} n & -\sum x_i \\ -\sum x_i & \sum x_i^2 \end{pmatrix} \begin{pmatrix} \sum x_iy_i \\ \sum y_i \end{pmatrix} \\
+\huge \Rightarrow &\huge m = \frac{\sum x_iy_i - n\bar{x}\bar{y}}{\sum x_i^2 - n\bar{x}^2}, b = \bar{y} - m\bar{x}
+\end{aligned}
+$$
+
+where $\bar{x} = \frac{1}{n} \sum_{i} x_i$ and $\bar{y} = \frac{1}{n} \sum_{i} y_i$ are the means of all ${x_i}$ and ${y_i}$ respectively. 
