@@ -130,7 +130,7 @@ Now that we justified the augmentaion, we can show how to find $\vec{w}$. As I m
 $$
 \begin{aligned}
 \huge L(\vec{w}) &\huge= \frac{1}{2n} \sum_{i=1}^{n} (y_i - \tilde{x_i}^T\vec{w})^2 \\
-&\huge = \frac{1}{2n} \|\vec{y} - \tilde{X}\vec{w}\|_2^2 \\
+&\huge = \frac{1}{2n} \lVert\vec{y} - \tilde{X}\vec{w}\rVert_2^2 \\
 &\huge = \frac{1}{2n} (\vec{y} - \tilde{X}\vec{w})^T(\vec{y} - \tilde{X}\vec{w}).
 \end{aligned}
 $$
