@@ -91,21 +91,21 @@ $$
 
 where $\bar{x} = \frac{1}{n} \sum_{i} x_i$ and $\bar{y} = \frac{1}{n} \sum_{i} y_i$ are the means of all ${x_i}$ and ${y_i}$ respectively.
 
-We now have the values for $m$ and $b$ that minimize our loss function and can now use our new model for any univarite sample $x$: $\hat{y} = mx + b$.
+We now have the values for $m$ and $b$ that minimize our loss function and can now use our new model for any univarite sample $x$, like this: $\hat{y} = mx + b$.
 
 ### Multivariate Case
 
-The multivariate case is essentially the same as the univariate case, just more generalized. In this case we will consider samples of $d$ features.
+The multivariate case is essentially the same as the univariate case, just generalized. In this case we will consider samples of $d$ features.
 
 #### Minimizing Loss
 
-We will use the same loss function but modify it to fit our multi-dimensional data points:
+We use the same loss function but modify it to fit our multi-dimensional data points:
 
 $$
 \huge L(\vec{w}) = \frac{1}{2n} \sum_{i=1}^{n} (y_i - \tilde{x_i}^T\vec{w})^2
 $$
 
-where $\vec{w}$ is a $(d+1 \times 1)$ column vector holding the bias term and the learned weights for each of the $d$ features, and $\tilde{x_i}$ augmented sample. In order to explain where this augmentation comes from, let's consider what one predicted value would look like if we had already fitted our model.
+where $\vec{w}$ is a $(d+1 \times 1)$ column vector holding the bias term and the learned weights for each of the $d$ features, and $\tilde{x_i}$ is an augmented sample. In order to explain where this augmentation comes from, let's consider what one predicted value would look like if we had already fitted our model.
 
 $$
 \huge \hat{y} = w_0 + w_1x_1 + w_2x_2 + ...+w_dx_d
@@ -116,13 +116,23 @@ It becomes clear when you consider what this may look like expressed through vec
 We do this to each sample vector in the data, giving us
 
 $$
-\huge \begin{bmatrix} 1 & x_{1, 1} & x_{1, 2} & \cdots & x_{1, d} \\\ 1 & x_{2, 1} & x_{2, 2} & \cdots & x_{2, d} \\\ \vdots & \vdots & \vdots & \ddots & \vdots  \\\ 1 & x_{n, 1} & x_{n, 2} & \cdots & x_{n, d} \end{bmatrix} = \begin{bmatrix} \tilde{x_1} \\\ \tilde{x_2} \\\ \vdots \\\ \tilde{x_n} \end{bmatrix} := \tilde{X}
+\huge \tilde{X} := \begin{bmatrix} \tilde{x_1} \\\ \tilde{x_2} \\\ \vdots \\\ \tilde{x_n} \end{bmatrix} = \begin{bmatrix} 1 & x_{1, 1} & x_{1, 2} & \cdots & x_{1, d} \\\ 1 & x_{2, 1} & x_{2, 2} & \cdots & x_{2, d} \\\ \vdots & \vdots & \vdots & \ddots & \vdots  \\\ 1 & x_{n, 1} & x_{n, 2} & \cdots & x_{n, d} \end{bmatrix}
 $$
 
-With this convention, we can represented all of our predicted values with an elegant expression:
+With this convention, we can represent all of our predicted values with an elegant expression:
 
 $$
 \huge \hat{Y} = \tilde{X} \vec{w}
 $$
 
-Now that we justified the augmentaion, we can show how to find $\vec{w}$. As I mentioned, the idea is the same; We must find where $\nabla L(\vec{w}) = \vec{0}$. 
+Now that we justified the augmentaion, we can show how to find $\vec{w}$. As I mentioned, the idea is the same; We must find where $\nabla L(\vec{w}) = \vec{0}$. It will make the calculations nicer to express $L(\vec{w})$ differently. Note that 
+
+$$
+\begin{aligned}
+\huge L(\vec{w}) &\huge= \frac{1}{2n} \sum_{i=1}^{n} (y_i - \tilde{x_i}^T\vec{w})^2 \\
+&\huge = \frac{1}{2n} \|\vec{y} - \tilde{X}\vec{w}\|_2^2 \\
+&\huge = \frac{1}{2n} (\vec{y} - \tilde{X}\vec{w})^T(\vec{y} - \tilde{X}\vec{w}).
+\end{aligned}
+$$
+
+Let $\vec{r}$ = $\vec{y} - \tilde{X}\vec{w}$. 
