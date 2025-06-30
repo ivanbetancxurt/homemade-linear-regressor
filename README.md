@@ -70,14 +70,14 @@ $$
 \end{aligned}
 $$
 
-We can use matrices to solve the system. Let $A = \begin{bmatrix} \sum x_i^2 & \sum x_i \\ \sum x_i & n \end{bmatrix}, c = \begin{pmatrix} \sum x_iy_i \\ \sum y_i \end{pmatrix}$. We assume $A$ is invertible. Observe that
+We can use matrices to solve the system. Let $A = \begin{bmatrix} \sum x_i^2 & \sum x_i \\ \sum x_i & n \end{bmatrix}, \vec{c} = \begin{pmatrix} \sum x_iy_i \\ \sum y_i \end{pmatrix}$. We assume $A$ is invertible. Observe that
 
 $$
 \begin{aligned}
-&\huge A \begin{pmatrix} m \\ b \end{pmatrix} = c \\
-\huge \Rightarrow &\huge A^{-1} (A \begin{pmatrix} m \\ b \end{pmatrix}) = A^{-1} c \\
-\huge \Rightarrow &\huge \begin{pmatrix} m \\ b \end{pmatrix} = A^{-1} c \\
-\huge \Rightarrow &\huge \begin{pmatrix} m \\ b \end{pmatrix} = \frac{1}{n \sum x_i^2 - (\sum x_i)^2} \begin{pmatrix} n & -\sum x_i \\ -\sum x_i & \sum x_i^2 \end{pmatrix} \begin{pmatrix} \sum x_iy_i \\ \sum y_i \end{pmatrix} \\
+&\huge A \begin{bmatrix} m \\\ b \end{bmatrix} = \vec{c} \\
+\huge \Rightarrow &\huge A^{-1} (A \begin{bmatrix} m \\\ b \end{bmatrix}) = A^{-1} \vec{c} \\
+\huge \Rightarrow &\huge \begin{bmatrix} m \\\ b \end{bmatrix} = A^{-1} \vec{c} \\
+\huge \Rightarrow &\huge \begin{bmatrix} m \\\ b \end{bmatrix} = \frac{1}{n \sum x_i^2 - (\sum x_i)^2} \begin{bmatrix} n & -\sum x_i \\\ -\sum x_i & \sum x_i^2 \end{bmatrix} \begin{bmatrix} \sum x_iy_i \\\ \sum y_i \end{bmatrix} \\
 \huge \Rightarrow &\huge m = \frac{\sum x_iy_i - n\bar{x}\bar{y}}{\sum x_i^2 - n\bar{x}^2}, b = \bar{y} - m\bar{x}
 \end{aligned}
 $$
