@@ -89,9 +89,6 @@ $$
 \end{aligned}
 $$
 
-<<<<<<< Updated upstream
-where $\bar{x} = \frac{1}{n} \sum_{i} x_i$ and $\bar{y} = \frac{1}{n} \sum_{i} y_i$ are the means of all ${x_i}$ and ${y_i}$ respectively. 
-=======
 where $\bar{x} = \frac{1}{n} \sum_{i} x_i$ and $\bar{y} = \frac{1}{n} \sum_{i} y_i$ are the means of all ${x_i}$ and ${y_i}$ respectively.
 
 We now have the values for $m$ and $b$ that minimize our loss function and can now use our new model for any univarite sample $x$: $\hat{y} = mx + b$.
@@ -129,4 +126,3 @@ $$
 $$
 
 Now that we justified the augmentaion, we can show how to find $\vec{w}$. As I mentioned, the idea is the same; We must find where $\nabla L(\vec{w}) = \vec{0}$. 
->>>>>>> Stashed changes
