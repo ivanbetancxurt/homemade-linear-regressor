@@ -167,3 +167,13 @@ $$
 $$
 
 We can now use our learned $\vec{w}$ to predict on new data as seen in equation (1).
+
+## Usage
+
+1. Import ```LinearRegression()``` from ```homemade_linear_regressor.py``` and initialize your model.
+
+```python
+from homemade_linear_regressor import LinearRegression
+
+lr = LinearRegression()
+```
