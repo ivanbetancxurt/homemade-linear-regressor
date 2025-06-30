@@ -48,7 +48,7 @@ $$
 \end{aligned}
 $$
 
-All that's left to do is set these derivative function equal to 0 and solve the system of equations. Then we will have found the values for $m$ and $b$ that satisfy $\nabla L(m, b) = (0, 0)$. Note that
+All that's left to do is set these derivative functions equal to 0 and solve the system of equations. Then we will have found the values for $m$ and $b$ that satisfy $\nabla L(m, b) = (0, 0)$. Note that
 
 $$
 \begin{aligned}
