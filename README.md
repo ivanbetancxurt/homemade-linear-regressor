@@ -22,11 +22,11 @@ $$
 \huge L(m, b) = \frac{1}{2n} \sum_{i=1}^{n} (y_i - (mx_i + b))^2
 $$
 
-where $n$ is the number data points, $y_i$ is the $y$ value of the $i$ th data point (what we may call the "true" value later on), and $m, b$ are the slope and intercept terms in the classic definition of a line ($y = mx + b$) respectively. 
+where $n$ is the number data points, $y_i$ is the $y$ value of the $i$ th data point, and $m, b$ are the slope and intercept terms in the classic definition of a line ($y = mx + b$) respectively. 
 
 *Note: The added factor of* $\frac{1}{2n}$ *is there simply to make differentiation down the line neater. Though it may change what the actual calculated loss is at a given point, it does* not *change where minimum of the function lays, which is what we are interested in.*
 
-Semantically, this function asks, "how well does my line $mx + b$ model the data?" Of course, a lower value means that line models the data better. Hence, for the best model, we must minimize the value of $L(m, b)$.
+Semantically, this function asks, "how well does my line $mx_i + b$ model the data?" Of course, a lower value means that line models the data better. Hence, for the best model, we must minimize the value of $L(m, b)$.
 
 We can do so by solving for where $\nabla L(m, b) = (0, 0)$. This requires us to first find $\frac{\partial L}{\partial m}$ and $\frac{\partial L}{\partial b}$.
 
@@ -89,4 +89,44 @@ $$
 \end{aligned}
 $$
 
+<<<<<<< Updated upstream
 where $\bar{x} = \frac{1}{n} \sum_{i} x_i$ and $\bar{y} = \frac{1}{n} \sum_{i} y_i$ are the means of all ${x_i}$ and ${y_i}$ respectively. 
+=======
+where $\bar{x} = \frac{1}{n} \sum_{i} x_i$ and $\bar{y} = \frac{1}{n} \sum_{i} y_i$ are the means of all ${x_i}$ and ${y_i}$ respectively.
+
+We now have the values for $m$ and $b$ that minimize our loss function and can now use our new model for any univarite sample $x$: $\hat{y} = mx + b$.
+
+### Multivariate Case
+
+The multivariate case is essentially the same as the univariate case, just more generalized. In this case we will consider samples of $d$ features.
+
+#### Minimizing Loss
+
+We will use the same loss function but modify it to fit our multi-dimensional data points:
+
+$$
+\huge L(\vec{w}) = \frac{1}{2n} \sum_{i=1}^{n} (y_i - \tilde{x_i}^T\vec{w})^2
+$$
+
+where $\vec{w}$ is a $(d+1 \times 1)$ column vector holding the bias term and the learned weights for each of the $d$ features, and $\tilde{x_i}$ augmented sample. In order to explain where this augmentation comes from, let's consider what one predicted value would look like if we had already fitted our model.
+
+$$
+\huge \hat{y} = w_0 + w_1x_1 + w_2x_2 + ...+w_dx_d
+$$
+
+It becomes clear when you consider what this may look like expressed through vectors. In order to maintain this form, we must augment the sample vector $\vec{x} = (x_1, x_2, x_3, ... ,x_d)^T$ so that $\vec{x}^T \vec{w}$ properly results in $\hat{y}$. We do so by prepending a 1 to it such that it becomes $(1, x_1, x_2, x_3, ... ,x_d)^T$. It may be helpful to note that the need for all this augmentation comes from our decision to embed the bias term with the parameter coefficients in $\vec{w}$.
+
+We do this to each sample vector in the data, giving us
+
+$$
+\huge \begin{bmatrix} 1 & x_{1, 1} & x_{1, 2} & \cdots & x_{1, d} \\\ 1 & x_{2, 1} & x_{2, 2} & \cdots & x_{2, d} \\\ \vdots & \vdots & \vdots & \ddots & \vdots  \\\ 1 & x_{n, 1} & x_{n, 2} & \cdots & x_{n, d} \end{bmatrix} = \begin{bmatrix} \tilde{x_1} \\\ \tilde{x_2} \\\ \vdots \\\ \tilde{x_n} \end{bmatrix} := \tilde{X}
+$$
+
+With this convention, we can represented all of our predicted values with an elegant expression:
+
+$$
+\huge \hat{Y} = \tilde{X} \vec{w}
+$$
+
+Now that we justified the augmentaion, we can show how to find $\vec{w}$. As I mentioned, the idea is the same; We must find where $\nabla L(\vec{w}) = \vec{0}$. 
+>>>>>>> Stashed changes
