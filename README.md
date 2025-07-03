@@ -178,7 +178,7 @@ from homemade_linear_regressor import LinearRegression
 lr = LinearRegression()
 ```
 
-2. Fit your model with the ```fit``` method using your features and targets. Both should be arrays of the same length and at most 2 dimensional.
+2. Fit your model with the ```fit``` method using your training features and targets. Both should be arrays of the same length and at most 2 dimensional.
 
 ```python
 # example features
@@ -192,4 +192,17 @@ X = [
 y = [3, 10, 4]
 
 lr.fit(X, y)
+```
+
+3. Use your model to predict on new data with the ```predict``` method and retrieve a prediction vector. This data should also be an array of at most 2 dimensions.
+
+```python
+# example data
+data = [
+    [25, 1, 3],
+    [2, 5, 9],
+    [1, 4, 4]
+]
+
+y_pred = lr.predict(data)
 ```
