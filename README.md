@@ -177,3 +177,19 @@ from homemade_linear_regressor import LinearRegression
 
 lr = LinearRegression()
 ```
+
+2. Fit your model with the ```fit``` method using your features and targets. Both should be arrays of the same length and at most 2 dimensional.
+
+```python
+# example features
+X = [
+    [2, 4, 7],
+    [10, 1, 25],
+    [0, 8, 9]
+]
+
+# example targets
+y = [3, 10, 4]
+
+lr.fit(X, y)
+```
